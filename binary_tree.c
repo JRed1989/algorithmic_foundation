@@ -15,7 +15,7 @@ EleNode * search(EleNode * t,int key){
     }
     return NULL;
 }
-void dySearch(EleNode * t ,int key,EleNode ** pkpt,EleNode ** kpt{
+void dySearch(EleNode * t ,int key,EleNode ** pkpt,EleNode ** kpt){
     *pkpt = NULL;
     *kpt = t;
     while(*kpt != NULL){
@@ -31,4 +31,33 @@ void dySearch(EleNode * t ,int key,EleNode ** pkpt,EleNode ** kpt{
 }
 
 
+int deleteNode(EleNode **pt,int key){
+    EleNode *parent,*p,*q,*child;
+    parent = NULL;
+    p = *pt;
+    while(p){
+        if(p->data == key){
+            break;
+        }
+        parent = p;
+        p = key < p->data ? p->lchild:p->rchild;
+    }
+    if(p==NULL){
+        return 0;
+    }
+    if(p->lchild&&p->rchild){
+        for(q = parent= p,p=p->rchild;p->lchild!=NULL;parent=p,p=p->lchild);
+        q->data=p->data;
+    }
+    child = p->lchild?p->lchild:p->rchild;
+    if(parent == NULL)*pt=child;
+    else if(p == parent->lchild)parent->lchild=child;
+    else
+        parent->rchild=child;
+    free(p);
+    return 1;
+
+
+
+}
 

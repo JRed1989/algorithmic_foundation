@@ -30,3 +30,5 @@ EleNode * search(EleNode * t,int key);
  * @param kpt
  */
 void dySearch(EleNode * t ,int key,EleNode ** pkpt,EleNode ** kpt);
+
+int deleteNode(EleNode **pt,int key);
